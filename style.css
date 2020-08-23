@@ -1,0 +1,97 @@
+.no-margin {
+	margin: 0;
+}
+.no-padding {
+	padding: 0;
+}
+.is-border-box-sized {
+	box-sizing: border-box;
+}
+.is-bottom-right-positioned {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+.is-right-positioned {
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+.is-fullscreen {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+.is-flex {
+	display: flex;
+}
+.is-flex-column {
+	flex-direction: column;
+}
+.is-flex-row {
+	flex-direction: row;
+}
+.is-vcentered {
+	align-items: center;
+	justify-content: center;
+}
+.is-fullheight {
+	height: 100vh;
+}
+.is-padded-one-half {
+	padding: 0.5em;
+}
+.is-padded-1 {
+	padding: 1em;
+}
+.is-padded-2 {
+	padding: 2em;
+}
+.is-padded-3 {
+	padding: 3em;
+}
+.is-bordered {
+	border: solid 1pt #ccc;
+}
+.is-rounded-1 {
+	border-radius: 1em;
+}
+.is-rounded-2 {
+	border-radius: 2em;
+}
+.is-rounded-3 {
+	border-radius: 3em;
+}
+.is-rounded-4 {
+	border-radius: 4em;
+}
+.is-rounded-5 {
+	border-radius: 10em;
+}
+.is-shadowed {
+	box-shadow: 1px 1px 2px #ccc;
+}
+.is-spaced-1 > :nth-child(n):not(:last-child) {
+	margin-bottom: 1em;
+}
+.is-layer-1 {
+	z-index: 1;
+}
+.is-bg-white {
+	background-color: #fff;
+}
+.is-size-squared-1 {
+	width: 1em;
+	height: 1em;
+}
+.is-size-squared-2 {
+	width: 2em;
+	height: 2em;
+}
+.is-size-squared-3 {
+	width: 3em;
+	height: 3em;
+}
