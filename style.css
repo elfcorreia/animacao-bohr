@@ -7,6 +7,12 @@
 .is-border-box-sized {
 	box-sizing: border-box;
 }
+.is-bottom-middle-positioned {
+	position: absolute;
+	bottom: 0;
+	left: auto;
+	right: auto;
+}
 .is-bottom-right-positioned {
 	position: absolute;
 	bottom: 0;
@@ -46,6 +52,9 @@
 }
 .is-right-padded-one-half {
 	padding-right: 0.5em;
+}
+.is-bottom-padded-one-half {
+	padding-bottom: 0.5em;
 }
 .is-padded-1 {
 	padding: 1em;
@@ -95,7 +104,7 @@
 	box-shadow: 1px 1px 2px #ccc;
 }
 .is-spaced-1 > :nth-child(n):not(:last-child) {
-	margin-bottom: 1em;
+	margin-left: 1em;
 }
 .is-layer-1 {
 	z-index: 1;
@@ -120,4 +129,7 @@
 }
 .is-pointer-cursor-hover:hover {
 	cursor: pointer;
+}
+.hidden-overflow {
+	overflow: hidden;
 }

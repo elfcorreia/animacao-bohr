@@ -24,8 +24,10 @@ function Simulacao() {
 		console.log("addProton");
 		this.protons.push({});
 	}
-	this.removeProton = function () {
-		console.log("removeProton");
+	this.removeProton = function () {		
+		if (self.protons.length > 0) {
+			self.protons = self.protons.slice(0, self.protons.length - 1);
+		}		
 	}
 	this.getTotalProtons = function () {
 		return this.protons.length;
@@ -36,7 +38,9 @@ function Simulacao() {
 		this.neutrons.push({});
 	}
 	this.removeNeutron = function () {
-		console.log("removeNeutron");
+		if (self.neutrons.length > 0) {
+			self.neutrons = self.neutrons.slice(0, self.neutrons.length - 1);
+		}
 	}
 	this.getTotalNeutrons = function() {
 		return this.neutrons.length;
@@ -47,8 +51,9 @@ function Simulacao() {
 		self.eletrons[nivel].push({ theta: 0, omega: speed });
 	}
 	this.removeEletron = function (nivel) {
-		//console.log("removeEletron", nivel);
-		self.eletrons[nivel] = self.eletrons[nivel].slice(0, self.eletrons[nivel].length - 1);
+		if (self.eletrons[nivel].length > 0) {
+			self.eletrons[nivel] = self.eletrons[nivel].slice(0, self.eletrons[nivel].length - 1);
+		}		
 	}
 	this.getTotalEletrons = function (nivel) {
 		if (nivel) {
