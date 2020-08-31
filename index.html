@@ -6,19 +6,126 @@
 	</head>
 	<body class="no-margin is-border-box-sized is-flex is-fullscreen is-vcentered">
 		<canvas id="canvas" width="500" height="500"></canvas>
-
 		<div class="is-flex is-flex-column is-right-positioned is-vcentered is-spaced-1 is-padded-1 is-layer-1">
-			<div class="is-bordered is-bg-white is-rounded-5 is-shadowed is-flex is-vcentered is-size-squared-3">
-				<p class="no-margin"><span id="total_protons">0</span> p<sup>+</sup></p>
+			<div class="is-bordered bg-white bg-gray-hover is-pointer-cursor-hover is-rounded-5 is-shadowed is-flex is-vcentered is-size-squared-3" data-popup="popup-protons">
+				<p class="no-margin"><span id="total-protons">0</span> p<sup>+</sup></p>				
 			</div>
-			<div class="is-bordered is-bg-white is-rounded-5 is-shadowed is-flex is-vcentered is-size-squared-3">
-				<p class="no-margin"><span id="total_neutrons">0</span> n</p>
+			<div id="popup-protons" class="is-right-padded-one-half">
+				<div class="bg-white is-bordered  is-shadowed is-rounded-one-half">
+					<div class="is-flex is-vcentered is-size-squared-2 bg-gray-hover is-pointer-cursor-hover is-rounded-one-half-top" id="proton-add">+</div>
+					<div class="is-flex is-vcentered is-size-squared-2 bg-gray-hover is-pointer-cursor-hover is-rounded-one-half-bottom" id="proton-remove">-</div>
+				</div>
 			</div>
-			<div class="is-bordered is-bg-white is-rounded-5 is-shadowed is-flex is-vcentered is-size-squared-3">
-				<p class="no-margin"><span id="total_eletrons">0</span> e<sup>-</sup></p>
+
+			<div class="is-bordered bg-white bg-gray-hover is-pointer-cursor-hover is-rounded-5 is-shadowed is-flex is-vcentered is-size-squared-3" data-popup="popup-neutrons">
+				<p class="no-margin"><span id="total-neutrons">0</span> n</p>
+			</div>
+			<div id="popup-neutrons" class="is-right-padded-one-half">
+				<div class="bg-white is-bordered  is-shadowed is-rounded-one-half">
+					<div class="is-flex is-vcentered is-size-squared-2 bg-gray-hover is-pointer-cursor-hover is-rounded-one-half-top" id="neutron-add">+</div>
+					<div class="is-flex is-vcentered is-size-squared-2 bg-gray-hover is-pointer-cursor-hover is-rounded-one-half-bottom" id="neutron-remove">-</div>
+				</div>
+			</div>
+
+			<div class="is-bordered bg-white bg-gray-hover is-pointer-cursor-hover is-rounded-5 is-shadowed is-flex is-vcentered is-size-squared-3" data-popup="popup-eletrons">
+				<p class="no-margin"><span id="total-eletrons">0</span> e<sup>-</sup></p>
+			</div>
+			<div id="popup-eletrons"  class="is-right-padded-one-half">
+				<div class="bg-white is-bordered is-flex is-shadowed is-rounded-one-half">
+					<div class="is-flex is-flex-column">
+						<div class="is-flex is-vcentered is-size-squared-2">K</div>
+						<div class="is-flex is-vcentered is-size-squared-2 bg-gray-hover is-pointer-cursor-hover" id="nivel-k-add">+</div>
+						<div class="is-flex is-vcentered is-size-squared-2" id="nivel-k-total">99</div>
+						<div class="is-flex is-vcentered is-size-squared-2 bg-gray-hover is-pointer-cursor-hover is-rounded-one-half-left-bottom" id="nivel-k-remove">-</div>
+					</div>
+					<div class="is-flex is-flex-column">
+						<div class="is-flex is-vcentered is-size-squared-2">L</div>
+						<div class="is-flex is-vcentered is-size-squared-2 bg-gray-hover is-pointer-cursor-hover" id="nivel-l-add">+</div>
+						<div class="is-flex is-vcentered is-size-squared-2" id="nivel-l-total">99</div>
+						<div class="is-flex is-vcentered is-size-squared-2 bg-gray-hover is-pointer-cursor-hover" id="nivel-l-remove">-</div>
+					</div>
+					<div class="is-flex is-flex-column">
+						<div class="is-flex is-vcentered is-size-squared-2">M</div>
+						<div class="is-flex is-vcentered is-size-squared-2 bg-gray-hover is-pointer-cursor-hover" id="nivel-m-add">+</div>
+						<div class="is-flex is-vcentered is-size-squared-2" id="nivel-m-total">99</div>
+						<div class="is-flex is-vcentered is-size-squared-2 bg-gray-hover is-pointer-cursor-hover" id="nivel-m-remove">-</div>
+					</div>
+					<div class="is-flex is-flex-column">
+						<div class="is-flex is-vcentered is-size-squared-2">N</div>
+						<div class="is-flex is-vcentered is-size-squared-2 bg-gray-hover is-pointer-cursor-hover" id="nivel-n-add">+</div>
+						<div class="is-flex is-vcentered is-size-squared-2" id="nivel-n-total">99</div>
+						<div class="is-flex is-vcentered is-size-squared-2 bg-gray-hover is-pointer-cursor-hover" id="nivel-n-remove">-</div>
+					</div>
+					<div class="is-flex is-flex-column">
+						<div class="is-flex is-vcentered is-size-squared-2">O</div>
+						<div class="is-flex is-vcentered is-size-squared-2 bg-gray-hover is-pointer-cursor-hover" id="nivel-o-add">+</div>
+						<div class="is-flex is-vcentered is-size-squared-2" id="nivel-o-total">99</div>
+						<div class="is-flex is-vcentered is-size-squared-2 bg-gray-hover is-pointer-cursor-hover" id="nivel-o-remove">-</div>
+					</div>
+					<div class="is-flex is-flex-column">
+						<div class="is-flex is-vcentered is-size-squared-2">P</div>
+						<div class="is-flex is-vcentered is-size-squared-2 bg-gray-hover is-pointer-cursor-hover" id="nivel-p-add">+</div>
+						<div class="is-flex is-vcentered is-size-squared-2" id="nivel-p-total">99</div>
+						<div class="is-flex is-vcentered is-size-squared-2 bg-gray-hover is-pointer-cursor-hover" id="nivel-p-remove">-</div>
+					</div>
+					<div class="is-flex is-flex-column">
+						<div class="is-flex is-vcentered is-size-squared-2">Q</div>
+						<div class="is-flex is-vcentered is-size-squared-2 bg-gray-hover is-pointer-cursor-hover" id="nivel-q-add">+</div>
+						<div class="is-flex is-vcentered is-size-squared-2" id="nivel-q-total">99</div>
+						<div class="is-flex is-vcentered is-size-squared-2 bg-gray-hover is-pointer-cursor-hover is-rounded-one-half-right-bottom" id="nivel-q-remove">-</div>
+					</div>
+				</div>
 			</div>
 		</div>
-
 	</body>
 	<script src="script.js"></script>
+	<script src="popup.js"></script>
+	<script>
+		function updateUI() {
+			document.getElementById('total-protons').innerHTML = simulacao.getTotalProtons();
+			document.getElementById('total-neutrons').innerHTML = simulacao.getTotalNeutrons();
+			document.getElementById('total-eletrons').innerHTML = simulacao.getTotalEletrons();
+			simulacao.niveis.forEach(nivel => {				
+				document.getElementById("nivel-" + nivel + "-total").innerHTML = simulacao.getTotalEletrons(nivel);
+			});					
+		}
+
+		function registerUIEvents() {
+			document.getElementById("proton-add").addEventListener("click", e => {
+				simulacao.addProton();
+				updateUI();
+			});
+			document.getElementById("proton-remove").addEventListener("click", e => {
+				simulacao.removeProton();
+				updateUI();
+			});
+			document.getElementById("neutron-add").addEventListener("click", e => {
+				simulacao.addNeutron();
+				updateUI();
+			});
+			document.getElementById("neutron-remove").addEventListener("click", e => {
+				simulacao.removeNeutron();
+				updateUI();
+			});
+			simulacao.niveis.forEach(nivel => {
+				let id = "nivel-" + nivel;
+				document.getElementById(id + "-add").addEventListener("click", e => {
+					simulacao.addEletron(nivel);
+					updateUI();
+				});
+				document.getElementById(id + "-remove").addEventListener("click", e => {
+					simulacao.removeEletron(nivel);
+					updateUI();
+				});
+			});
+		}
+		
+		let simulacao = new Simulacao();
+		document.addEventListener("DOMContentLoaded", () => {
+			initPopups();
+			registerUIEvents();
+			updateUI();
+			simulacao.start();
+		});
+	</script>
 </html>

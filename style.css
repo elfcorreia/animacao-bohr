@@ -44,6 +44,9 @@
 .is-padded-one-half {
 	padding: 0.5em;
 }
+.is-right-padded-one-half {
+	padding-right: 0.5em;
+}
 .is-padded-1 {
 	padding: 1em;
 }
@@ -55,6 +58,23 @@
 }
 .is-bordered {
 	border: solid 1pt #ccc;
+}
+.is-rounded-one-half {
+	border-radius: 0.5em;
+}
+.is-rounded-one-half-top {
+	border-top-left-radius: 0.5em;
+	border-top-right-radius: 0.5em;
+}
+.is-rounded-one-half-bottom {
+	border-bottom-left-radius: 0.5em;
+	border-bottom-right-radius: 0.5em;
+}
+.is-rounded-one-half-left-bottom {
+	border-bottom-left-radius: 0.5em;	
+}
+.is-rounded-one-half-right-bottom {	
+	border-bottom-right-radius: 0.5em;
 }
 .is-rounded-1 {
 	border-radius: 1em;
@@ -80,7 +100,7 @@
 .is-layer-1 {
 	z-index: 1;
 }
-.is-bg-white {
+.bg-white {
 	background-color: #fff;
 }
 .is-size-squared-1 {
@@ -94,4 +114,10 @@
 .is-size-squared-3 {
 	width: 3em;
 	height: 3em;
+}
+.bg-gray-hover:hover {
+	background-color: #ccc;
+}
+.is-pointer-cursor-hover:hover {
+	cursor: pointer;
 }
