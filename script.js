@@ -1,18 +1,21 @@
-let canvas = document.getElementById("canvas");
-const ctx = canvas.getContext('2d');
-
 function Simulacao() {
 	let self = this;
+	let canvas = document.getElementById("canvas");
+	const ctx = canvas.getContext('2d');
+	
+	const speed = Math.PI / 30;
+	const proton_radius = 6;
+	const eletron_radius = 3;			
+	const nivel_nucleo_gap = 40;
+	const nivel_gap = 25;
+	const cor_proton = 'rgba(180, 82, 82, 0.9)';
+	const cor_neutron = 'rgba(33, 33, 35, 0.9)';
+	const cor_eletron = '#4b80ca';	
+	const cor_fundo = 'white';
+	const cor_nivel = '#ccc';
 
-	const speed = Math.PI / 72;
-
-	this.niveis = ["k", "l", "m", "n", "o", "p", "q"];
-	this.eletrons = { k: [], l: [], m: [], n: [], o: [], p: [], q: [] };
-	this.protons = [];
-	this.neutrons = [];
-
-	this.passo = function() {
-		//console.log(self.eletrons);
+	this.step = function() {
+		self.nbody.step();		
 		for (let nivel in self.eletrons) {
 			self.eletrons[nivel] = self.eletrons[nivel].map((e) => {					
 				return { theta: e.theta + e.omega, omega: e.omega }; 
@@ -20,34 +23,40 @@ function Simulacao() {
 		}
 	}
 
+	this.updateNucleoNBody = function() {
+		let n = self.protons.length + self.neutrons.length;
+		self.nbody = new NBodySimulation(n, proton_radius*2, 1, 5e-1, 0.5);
+	}
+
 	this.addProton = function () {
-		console.log("addProton");
-		this.protons.push({});
+		self.protons.push({x: 0, y: 0});
+		self.updateNucleoNBody();
 	}
 	this.removeProton = function () {		
 		if (self.protons.length > 0) {
 			self.protons = self.protons.slice(0, self.protons.length - 1);
-		}		
+			self.updateNucleoNBody();
+		}
 	}
 	this.getTotalProtons = function () {
-		return this.protons.length;
+		return self.protons.length;
 	}
 
 	this.addNeutron = function () {
-		console.log("addNeutron");
-		this.neutrons.push({});
+		self.neutrons.push({x: 0, y: 0});
+		self.updateNucleoNBody();
 	}
 	this.removeNeutron = function () {
 		if (self.neutrons.length > 0) {
 			self.neutrons = self.neutrons.slice(0, self.neutrons.length - 1);
+			self.updateNucleoNBody();
 		}
 	}
 	this.getTotalNeutrons = function() {
-		return this.neutrons.length;
+		return self.neutrons.length;
 	}
 
 	this.addEletron = function (nivel) {
-		console.log("addEletron", nivel);
 		self.eletrons[nivel].push({ theta: 0, omega: speed });
 	}
 	this.removeEletron = function (nivel) {
@@ -57,40 +66,59 @@ function Simulacao() {
 	}
 	this.getTotalEletrons = function (nivel) {
 		if (nivel) {
-			return this.eletrons[nivel].length;
+			return self.eletrons[nivel].length;
 		}
 		let total = 0;
-		for (let nivel in this.eletrons) {
-			total += this.eletrons[nivel].length;
+		for (let nivel in self.eletrons) {
+			total += self.eletrons[nivel].length;
 		}
 		return total;		
-	} 
+	}	
 
-	this.render = function () {
-		const proton_radius = 16;
-		const eletron_radius = 4;			
-		const nivel_gap = 30;
-	
+	this.render = function () {	
 		let cx = canvas.width/2;
 		let cy = canvas.height/2;
 	
-		ctx.fillStyle = 'white';
+		ctx.fillStyle = cor_fundo;
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		
+		let idxProton = 0;
+		let idxNeutron = 0;		
+		//let neutronsOffset = self.protons.length;
+		let idxNBody = 0;
+		let n = self.nbody.getN();
+		while (idxNBody < n) {			
+			if (idxProton < self.protons.length) {
+				let aux =  self.nbody.getObject(idxNBody);
+				ctx.beginPath();
+				ctx.fillStyle = cor_proton;
+				ctx.arc(cx + aux.x, cy + aux.y, proton_radius, 0, 2*Math.PI);
+				ctx.fill();
+				idxProton++;
+				idxNBody++;
+			}
+			if (idxNeutron < self.neutrons.length) {
+				let aux = self.nbody.getObject(idxNBody);
+				ctx.beginPath();
+				ctx.fillStyle = cor_neutron;
+				ctx.arc(cx + aux.x, cy + aux.y, proton_radius, 0, 2*Math.PI);
+				ctx.fill();
+				idxNeutron++;
+				idxNBody++;
+			}			
+		}
 	
-		ctx.fillStyle = 'red';
-		ctx.beginPath();
-		ctx.arc(cx, cy, proton_radius, 0, 2*Math.PI);
-		ctx.fill();			
-	
-		ctx.strokeStyle = "gray";
+		ctx.strokeStyle = cor_nivel;
 		//console.log(self.eletrons);
 		for (let nivel in self.eletrons) {
-			let nr = proton_radius + nivel_gap * (self.niveis.indexOf(nivel) + 1);
+			let nr = proton_radius + nivel_nucleo_gap + nivel_gap * (self.niveis.indexOf(nivel) + 1);
 			ctx.beginPath();
+			ctx.setLineDash([5, 5]);
 			ctx.arc(cx, cy, nr, 0, 2*Math.PI);
 			ctx.stroke();
+			
 	
-			ctx.fillStyle = "blue";
+			ctx.fillStyle = cor_eletron;
 			for (let i = 0; i < self.eletrons[nivel].length; i++) {
 				//console.log(self.eletrons[nivel][i]);
 				ctx.beginPath();				
@@ -111,39 +139,13 @@ function Simulacao() {
 		requestAnimationFrame(self.animate);
 	}
 	this.start = function() {
-		setInterval(this.passo, 50);
-		this.animate();
+		setInterval(self.step, 50);
+		self.animate();
 	}
+
+	this.niveis = ["k", "l", "m", "n", "o", "p", "q"];
+	this.eletrons = { k: [], l: [], m: [], n: [], o: [], p: [], q: [] };
+	this.protons = [];
+	this.neutrons = [];	
+	this.updateNucleoNBody();
 }
-
-// document.addEventListener("DOMContentLoaded", function() {
-// [	"eletrons_K", "eletrons_L", "eletrons_M", 
-// 	"eletrons_N", "eletrons_O", "eletrons_P", 
-// 	"eletrons_Q"	].forEach(id => {
-	
-// 	let edit = document.getElementById(id);
-// 	let menos = edit.previousSibling;
-// 	let mais = edit.nextSibling;
-// 	let nivel = edit.id.split("_")[1];
-
-// 	edit.value = 0;
-// 	mais.addEventListener("click", (e) => {
-// 		let v = parseInt(edit.value);
-// 		if (v < 32) {
-// 			edit.value = v + 1;
-// 			eletrons[nivel].push({
-// 				r: 30 + 20, 
-// 				theta: Math.PI / 18,
-// 				omega: Math.PI / 72,
-// 			});
-// 		}
-// 	});
-// 	menos.addEventListener("click", (e) => {
-// 		let v = parseInt(edit.value);
-// 		if (v > 0) {
-// 			edit.value = v - 1;
-// 			eletrons[nivel] = eletrons[nivel].slice(0, eletrons[nivel].length - 1);
-// 		}
-// 	});
-// });
-// });

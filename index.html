@@ -79,8 +79,9 @@
 			</div>
 		</div>
 	</body>
+	<script src="spring.js"></script>
 	<script src="script.js"></script>
-	<script src="popup.js"></script>
+	<script src="popup.js"></script>	
 	<script>
 		function updateUI() {
 			document.getElementById('total-protons').innerHTML = simulacao.getTotalProtons();
@@ -123,9 +124,15 @@
 		
 		let simulacao = new Simulacao();
 		document.addEventListener("DOMContentLoaded", () => {
+			simulacao.addProton();
+			simulacao.addProton();	
+			simulacao.addNeutron();
+			simulacao.addNeutron();
+			simulacao.addEletron('k');
+			simulacao.addEletron('k');
 			initPopups();
 			registerUIEvents();
-			updateUI();
+			updateUI();			
 			simulacao.start();
 		});
 	</script>
